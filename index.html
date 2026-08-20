@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Traxe Technologies — AI adoption for organizations that need clarity, not hype</title>
+<meta name="description" content="Traxe Technologies is a boutique AI adoption consultancy for small and mid-sized organizations, non-profits, and public-sector teams. We find the signal in your data and turn it into strategy your team can act on." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C0E;
+    --bg-raised:#131417;
+    --paper-line:#1D1F21;
+    --ink:#EDEDE6;
+    --ink-soft:#8A8D90;
+    --ink-faint:#5C5F62;
+    --accent:#C6FF3D;
+    --max:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',-apple-system,sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Inter',sans-serif; font-weight:600; letter-spacing:-0.01em; margin:0; }
+  .mono{ font-family:'IBM Plex Mono',monospace; letter-spacing:0.05em; }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 32px; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  /* background grid, used behind the hero only */
+  .grid-bg{
+    position:absolute; inset:0; z-index:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:48px 48px;
+    opacity:0.5;
+    mask-image:radial-gradient(circle at 30% 40%, black 0%, transparent 70%);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,12,14,0.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--paper-line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:20px 0; }
+  .logo{
+    font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:15px; letter-spacing:0.14em;
+    text-decoration:none; display:flex; align-items:center; gap:9px; color:var(--ink);
+  }
+  .logo-mark{ display:block; flex-shrink:0; }
+  nav.links{ display:flex; gap:36px; align-items:center; }
+  nav.links a{ text-decoration:none; font-size:14.5px; color:var(--ink-soft); transition:color .15s ease; }
+  nav.links a:hover{ color:var(--ink); }
+  nav.links a.nav-cta, nav.links a.nav-cta:hover{
+    font-size:13.5px; font-weight:700; padding:10px 18px; background:var(--accent); color:#000000;
+    border-radius:2px; text-decoration:none; white-space:nowrap;
+  }
+  .nav-cta:hover{ opacity:0.85; }
+  .menu-toggle{ display:none; }
+  @media (max-width:820px){
+    nav.links{
+      position:fixed; top:65px; left:0; right:0; background:var(--bg);
+      flex-direction:column; align-items:flex-start; gap:0;
+      border-bottom:1px solid var(--paper-line); max-height:0; overflow:hidden; transition:max-height .25s ease;
+    }
+    nav.links.open{ max-height:320px; }
+    nav.links a{ padding:16px 32px; width:100%; border-top:1px solid var(--paper-line); }
+    .nav-cta{ margin:16px 32px; display:inline-block; }
+    .menu-toggle{
+      display:block; background:none; border:none; cursor:pointer;
+      font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:.08em; color:var(--ink); padding:8px;
+    }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-stage{ position:relative; padding:100px 0 90px; overflow:hidden; }
+  .eyebrow{
+    font-size:12.5px; color:var(--accent); text-transform:uppercase;
+    display:flex; align-items:center; gap:10px; margin-bottom:32px; letter-spacing:0.12em;
+  }
+  .eyebrow::before{ content:""; width:20px; height:1px; background:var(--accent); }
+  .hero h1{
+    font-weight:500; letter-spacing:-0.01em;
+    font-size:clamp(2rem, 4.6vw, 3.2rem); line-height:1.25; margin:0 0 28px; color:var(--ink-soft);
+  }
+  .hero h1 .lead-line{ color:var(--ink); font-weight:600; }
+  .lock{ position:relative; display:inline-flex; align-items:center; justify-content:center; width:10.6ch; padding:2px 4px; vertical-align:baseline; }
+  .lock-word{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--accent); white-space:nowrap; }
+  .bracket{ position:absolute; width:14px; height:14px; border:1.5px solid var(--accent); opacity:0.9; }
+  .bracket.tl{ top:-4px; left:-4px; border-right:none; border-bottom:none; }
+  .bracket.tr{ top:-4px; right:-4px; border-left:none; border-bottom:none; }
+  .bracket.bl{ bottom:-4px; left:-4px; border-right:none; border-top:none; }
+  .bracket.br{ bottom:-4px; right:-4px; border-left:none; border-top:none; }
+  .lock.pulse .bracket{ animation: lockPulse 0.5s ease; }
+  @keyframes lockPulse{ 0%{ transform:scale(1.6); opacity:0; } 100%{ transform:scale(1); opacity:0.9; } }
+  .lock-word.pulse{ animation: wordIn 0.4s ease; }
+  @keyframes wordIn{ 0%{ opacity:0; } 100%{ opacity:1; } }
+  .hero p.lede{ font-size:16.5px; color:var(--ink-soft); max-width:52ch; line-height:1.65; margin:0 0 40px; }
+  .hero-ctas{ display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--accent); color:#000000; padding:13px 24px; border-radius:2px;
+    text-decoration:none; font-size:14.5px; font-weight:700; display:inline-block;
+  }
+  .btn-primary:hover{ opacity:0.85; }
+  .btn-ghost{
+    padding:13px 4px; text-decoration:none; font-size:14.5px; font-weight:500; color:var(--ink);
+    border-bottom:1px solid var(--ink-soft); display:inline-block;
+  }
+  .btn-ghost:hover{ color:var(--accent); border-color:var(--accent); }
+  .coord{ margin-top:56px; font-size:11px; color:var(--ink-faint); letter-spacing:0.08em; }
+
+  /* ---------- Hero widget: interactive star field + magnifier ---------- */
+  .hero-grid{ position:relative; z-index:1; display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center; }
+  @media (max-width:900px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .mini-field{ order:-1; max-width:340px; margin:0 auto 12px; }
+  }
+  .mini-field{
+    position:relative; border:1px solid var(--paper-line); border-radius:3px;
+    background:var(--bg-raised); padding:16px;
+  }
+  .mini-field::before{
+    content:""; position:absolute; inset:16px;
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:22px 22px; opacity:0.4;
+    mask-image:radial-gradient(circle at 50% 42%, black 0%, transparent 72%);
+    pointer-events:none;
+  }
+  .mini-field svg{ width:100%; height:auto; display:block; cursor:grab; position:relative; }
+  .mini-caption{ margin-top:10px; font-size:10.5px; color:var(--ink-faint); text-align:center; letter-spacing:0.06em; }
+  .frame-tick{ stroke:var(--ink-faint); stroke-width:1; fill:none; opacity:0.6; }
+  .frame-via{ fill:var(--ink-faint); opacity:0.5; }
+  .nebula{ transition:opacity .4s ease; pointer-events:none; }
+
+  .noise-dot{ fill:var(--ink-faint); }
+  .field-dot{
+    transition:cx .16s ease-out, cy .16s ease-out, fill .35s ease, opacity .35s ease, r .35s ease;
+    animation-name: twinkle; animation-timing-function: ease-in-out; animation-iteration-count: infinite;
+  }
+  @keyframes twinkle{ 0%,100%{ opacity:0.18; } 50%{ opacity:0.65; } }
+  .field-dot.connected{ animation:none; fill:var(--accent); }
+  .needle-dot{ fill:var(--accent); }
+  .grab-zone{ fill:transparent; cursor:grab; }
+  .grab-zone.dragging{ cursor:grabbing; }
+  .reticle{ opacity:0.85; }
+  .reticle.idle-pulse{ animation: idleBreathe 2.4s ease-in-out infinite; }
+  @keyframes idleBreathe{ 0%,100%{ opacity:0.6; } 50%{ opacity:0.95; } }
+  .lens-glass{ fill:var(--bg); fill-opacity:0.5; stroke:none; }
+  .lens-ring{ fill:none; stroke:var(--accent); stroke-width:1.6; opacity:0.95; }
+  .lens-handle{ stroke:var(--accent); stroke-width:2.2; stroke-linecap:round; opacity:0.95; }
+  .reticle.found .lens-ring{ animation: lockSnap .35s ease; }
+  @keyframes lockSnap{ 0%{ stroke-width:3; } 100%{ stroke-width:1.6; } }
+  .conn-line{ stroke:var(--accent); stroke-width:0.9; opacity:0; transition:opacity .25s ease; }
+  .beam-line{ stroke-dasharray:2,3; }
+  .chain-line{ stroke-width:1.1; }
+  .insight-label{
+    fill:var(--accent); font-size:11px; font-weight:600; letter-spacing:0.1em;
+    opacity:0; transition:opacity .6s ease; pointer-events:none;
+    filter: drop-shadow(0 0 2px rgba(198,255,61,0.95)) drop-shadow(0 0 9px rgba(198,255,61,0.6)) drop-shadow(0 0 20px rgba(198,255,61,0.3));
+    animation: starShimmer 3.2s ease-in-out infinite;
+  }
+  @keyframes starShimmer{
+    0%,100%{ filter: drop-shadow(0 0 2px rgba(198,255,61,0.95)) drop-shadow(0 0 9px rgba(198,255,61,0.6)) drop-shadow(0 0 20px rgba(198,255,61,0.3)); }
+    50%{ filter: drop-shadow(0 0 3px rgba(198,255,61,1)) drop-shadow(0 0 13px rgba(198,255,61,0.8)) drop-shadow(0 0 28px rgba(198,255,61,0.45)); }
+  }
+  .celebration-flash{ fill:var(--accent); opacity:0; pointer-events:none; }
+  .celebration-flash.flash{ animation: celebrateFlash 1s ease-out; }
+  @keyframes celebrateFlash{ 0%{ opacity:0; } 12%{ opacity:0.2; } 100%{ opacity:0; } }
+
+  /* ---------- Section shared ---------- */
+  section{ padding:88px 0; position:relative; }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(1.5rem, 2.4vw, 2rem); margin-top:14px; }
+  .section-head p{ color:var(--ink-soft); margin-top:16px; font-size:16px; max-width:56ch; }
+  hr.rule{ border:none; border-top:1px solid var(--paper-line); margin:0; }
+
+  /* ---------- Problem ---------- */
+  .problem-text{ max-width:680px; }
+  .problem-text p{ color:var(--ink-soft); font-size:18px; line-height:1.75; margin:0 0 20px; }
+  .problem-text p:last-child{ margin-bottom:0; }
+  .problem-text strong{ color:var(--ink); font-weight:600; }
+
+  /* ---------- Process ---------- */
+  .process-list{ border-top:1px solid var(--paper-line); }
+  .process-item{
+    display:grid; grid-template-columns:80px 1fr 1.3fr; gap:28px; padding:32px 0;
+    border-bottom:1px solid var(--paper-line); align-items:baseline;
+  }
+  .process-item .num{ color:var(--accent); font-size:13px; }
+  .process-item h3{ font-size:19px; }
+  .process-item p{ color:var(--ink-soft); margin:0; font-size:15px; }
+  @media (max-width:760px){ .process-item{ grid-template-columns:1fr; gap:8px; } }
+
+  /* ---------- Value pipeline ---------- */
+  .example-card{
+    border:1px solid var(--paper-line); border-radius:4px; background:var(--bg-raised);
+    padding:36px 40px 28px; margin-bottom:44px;
+  }
+  .example-tag{ font-size:11.5px; color:var(--accent); letter-spacing:0.1em; display:block; margin-bottom:28px; }
+  .example-viz{ width:100%; height:auto; display:block; }
+
+  .ex-tangle{ fill:none; stroke:var(--ink-faint); stroke-width:1.4; stroke-linejoin:round; opacity:0.6; }
+  .ex-clean{ stroke:var(--accent); stroke-width:1.8; opacity:0.95; }
+  .ex-endpoint{ fill:var(--ink); }
+
+  .ex-lens-mark-glass{ fill:var(--bg-raised); stroke:none; }
+  .ex-lens-mark-ring{ fill:none; stroke:var(--accent); stroke-width:1.4; }
+  .ex-lens-mark-handle{ stroke:var(--accent); stroke-width:2; stroke-linecap:round; }
+
+  .ex-caption{ fill:var(--ink-soft); font-family:'Inter',sans-serif; font-size:13px; }
+
+  .example-disclaimer{ display:block; margin-top:18px; padding-top:14px; border-top:1px solid var(--paper-line); font-size:12px; color:var(--ink-faint); }
+  @media (max-width:820px){
+    .example-card{ padding:28px 20px 24px; }
+  }
+  .pipeline{
+    display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:0; align-items:start;
+  }
+  .pipeline-stage{ padding:4px 22px; }
+  .pipeline-stage:first-child{ padding-left:0; }
+  .pipeline-stage:last-child{ padding-right:0; }
+  .pipeline-label{ font-size:11.5px; color:var(--accent); margin-bottom:18px; display:block; }
+  .pipeline-list{ list-style:none; margin:0; padding:0; }
+  .pipeline-list li{
+    font-size:14.5px; color:var(--ink-soft); padding:10px 0; border-top:1px solid var(--paper-line);
+  }
+  .pipeline-list li:last-child{ border-bottom:1px solid var(--paper-line); }
+  .pipeline-stage p{ font-size:15px; color:var(--ink-soft); line-height:1.7; margin:0; }
+  .pipeline-values{ list-style:none; margin:0; padding:0; }
+  .pipeline-values li{
+    display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--paper-line);
+    font-size:15px; color:var(--ink); font-weight:500;
+  }
+  .pipeline-values li:last-child{ border-bottom:1px solid var(--paper-line); }
+  .pipeline-values .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+  .pipeline-arrow{
+    display:flex; align-items:center; justify-content:center; padding-top:52px;
+    color:var(--ink-faint); font-size:16px;
+  }
+  @media (max-width:820px){
+    .pipeline{ grid-template-columns:1fr; }
+    .pipeline-arrow{ transform:rotate(90deg); padding:12px 0; justify-content:flex-start; }
+    .pipeline-stage{ padding:0; }
+  }
+
+  /* ---------- Audience ---------- */
+  .audience-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--paper-line); border:1px solid var(--paper-line); }
+  .audience-card{ background:var(--bg); padding:36px 32px; }
+  .audience-card .icon{ margin-bottom:22px; display:block; color:var(--accent); }
+  .audience-card .mono{ font-size:11.5px; color:var(--accent); display:block; margin-bottom:16px; }
+  .audience-card h3{ font-size:18px; margin-bottom:10px; }
+  .audience-card p{ color:var(--ink-soft); font-size:14.5px; margin:0; }
+  @media (max-width:820px){ .audience-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- Calculator ---------- */
+  .calc-panel{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px;
+    align-items:center;
+    border:1px solid var(--paper-line); border-radius:4px; padding:48px;
+    background:var(--bg-raised);
+  }
+  .calc-inputs{ display:flex; flex-direction:column; gap:36px; }
+  .calc-field{ display:flex; flex-direction:column; gap:14px; }
+  .calc-label{
+    display:flex; justify-content:space-between; align-items:baseline; gap:16px;
+    font-size:14px; color:var(--ink-soft);
+  }
+  .calc-value{ color:var(--accent); font-size:15px; font-weight:600; }
+  .calc-slider{
+    -webkit-appearance:none; appearance:none;
+    width:100%; height:2px; background:var(--paper-line); border-radius:2px; outline:none;
+  }
+  .calc-slider::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--accent); cursor:pointer;
+    border:3px solid var(--bg-raised);
+    box-shadow:0 0 0 1px var(--accent);
+  }
+  .calc-slider::-moz-range-thumb{
+    width:16px; height:16px; border-radius:50%;
+    background:var(--accent); cursor:pointer; border:3px solid var(--bg-raised);
+    box-shadow:0 0 0 1px var(--accent);
+  }
+  .calc-result{
+    text-align:center; border-left:1px solid var(--paper-line); padding-left:48px;
+  }
+  .calc-result-label{ font-size:11px; color:var(--ink-faint); letter-spacing:0.1em; }
+  .calc-lock{
+    position:relative; display:inline-flex; align-items:center; justify-content:center;
+    margin:22px 0 20px; padding:10px 22px;
+  }
+  .calc-lock .bracket{ width:16px; height:16px; }
+  .calc-number{ font-size:2.6rem; font-weight:600; color:var(--accent); }
+  .calc-disclaimer{ font-size:12px; color:var(--ink-faint); line-height:1.6; max-width:36ch; margin:0 auto; }
+
+  @media (max-width:820px){
+    .calc-panel{ grid-template-columns:1fr; padding:32px; gap:40px; }
+    .calc-result{ border-left:none; border-top:1px solid var(--paper-line); padding-left:0; padding-top:36px; }
+  }
+
+  /* ---------- Why ---------- */
+  .why-grid{ display:grid; grid-template-columns:1fr; max-width:640px; }
+  .why-list{ list-style:none; margin:0; padding:0; }
+  .why-list li{
+    padding:22px 0; border-top:1px solid var(--paper-line);
+    display:grid; grid-template-columns:22px 1fr; gap:16px;
+  }
+  .why-list li:last-child{ border-bottom:1px solid var(--paper-line); }
+  .why-list .mark{ color:var(--accent); font-family:'IBM Plex Mono',monospace; }
+  .why-list h4{ font-size:16px; font-weight:600; margin-bottom:6px; }
+  .why-list p{ color:var(--ink-soft); font-size:14.5px; margin:0; }
+
+  /* ---------- CTA ---------- */
+  .cta-block{ text-align:center; padding:100px 0; border-top:1px solid var(--paper-line); }
+  .cta-block h2{ font-size:clamp(1.7rem, 3.4vw, 2.4rem); max-width:16ch; margin:0 auto; }
+  .cta-block p{ color:var(--ink-soft); margin-top:18px; max-width:48ch; margin-left:auto; margin-right:auto; }
+  .cta-block .btn-primary{ margin-top:32px; }
+
+  /* ---------- Footer ---------- */
+  footer{ border-top:1px solid var(--paper-line); padding:40px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .foot-row .mono{ font-size:12px; color:var(--ink-faint); }
+  .foot-links{ display:flex; gap:24px; }
+  .foot-links a{ font-size:13px; color:var(--ink-soft); text-decoration:none; }
+  .foot-links a:hover{ color:var(--ink); }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" width="23" height="23" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="10" cy="10" r="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="2.1" />
+        <line x1="16" y1="16" x2="21.5" y2="21.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" />
+      </svg>
+      TRAXE
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <nav class="links" id="navLinks">
+      <a href="#problem">Approach</a>
+      <a href="#why">Why Traxe</a>
+      <a href="#contact" class="nav-cta">Start a conversation</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero-stage">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow mono">BOUTIQUE AI ADOPTION CONSULTING</div>
+        <h1>
+          <span class="lead-line">AI adoption that increases</span><br>
+          <span class="lock" id="lockFrame">
+            <span class="bracket tl"></span><span class="bracket tr"></span>
+            <span class="bracket bl"></span><span class="bracket br"></span>
+            <span class="lock-word mono" id="lockWord">efficiency</span>
+          </span>.
+        </h1>
+        <p class="lede">Traxe Technologies is a boutique AI adoption consultancy. We map how your organization actually runs and find the closest achievable AI opportunity — the one that creates real value without turning your operation upside down.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">Start a conversation</a>
+          <a href="#problem" class="btn-ghost">See how we work</a>
+        </div>
+      </div>
+      <div>
+        <div class="mini-field">
+          <svg viewBox="0 0 340 300" id="fieldSvg" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div class="mini-caption mono">GRAB THE SIGNAL TO EXPLORE</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule" />
+
+  <!-- PROBLEM -->
+  <section class="wrap" id="problem-context">
+    <div class="section-head reveal">
+      <div class="eyebrow mono">THE PROBLEM</div>
+      <h2>Most organizations don't need more data. They need to know what to do with it.</h2>
+    </div>
+    <div class="problem-text reveal">
+      <p>Between operations, funders, and whatever system your team already runs on, most organizations are sitting on <strong>more data than anyone has time to make sense of</strong> — and most AI advice out there is either abstract hype or a generic playbook that doesn't fit how you actually work.</p>
+      <p>Traxe exists for the space in between: organizations who don't need a research lab, just someone to <strong>map how the work actually happens and find the closest achievable AI opportunity</strong> — not the biggest idea, the one that actually pays off.</p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- PROCESS -->
+  <section class="wrap" id="problem">
+    <div class="section-head reveal">
+      <div class="eyebrow mono">HOW WE WORK</div>
+      <h2>We find the closest achievable AI opportunity — not the biggest idea, the one that pays off.</h2>
+      <p>Four steps, in order, each one answering a question you'd otherwise be guessing at.</p>
+    </div>
+    <div class="process-list reveal">
+      <div class="process-item">
+        <span class="num mono">01</span>
+        <h3>Extract</h3>
+        <p>We map how the work actually happens — the process, the workflow, the systems — and find where AI could realistically help. Not a wishlist. The shortlist.</p>
+      </div>
+      <div class="process-item">
+        <span class="num mono">02</span>
+        <h3>Tailor</h3>
+        <p>We tell you exactly what your next step should be, where to start, and what has to change to make it work — sized to your team, not a generic playbook.</p>
+      </div>
+      <div class="process-item">
+        <span class="num mono">03</span>
+        <h3>Streamline</h3>
+        <p>We build the plan around your team as it exists today — no new headcount, no rebuilding from scratch — and set out exactly how it gets delivered.</p>
+      </div>
+      <div class="process-item">
+        <span class="num mono">04</span>
+        <h3>Measure</h3>
+        <p>We define upfront how much value it should create and how you'll measure it, so you know it worked — not guess.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- VALUE PIPELINE -->
+  <section class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow mono">WHERE THE VALUE COMES FROM</div>
+      <h2>Value doesn't come out of nowhere. It's already sitting in your process, your workflow, your data — we just find it.</h2>
+    </div>
+
+    <div class="example-card reveal">
+      <span class="example-tag mono">AN ILLUSTRATIVE EXAMPLE</span>
+      <svg class="example-viz" viewBox="0 0 620 155" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+        <path class="ex-tangle" d="M50,70 L80,42 L105,92 L130,48 L158,95 L185,38 L210,88 L235,52 L262,90 L288,46 L318,70" />
+        <line class="ex-clean" x1="318" y1="70" x2="580" y2="70" />
+
+        <circle class="ex-endpoint" cx="50" cy="70" r="5" />
+        <circle class="ex-endpoint" cx="580" cy="70" r="5" />
+
+        <g class="ex-lens-mark">
+          <circle class="ex-lens-mark-glass" cx="318" cy="70" r="14" />
+          <circle class="ex-lens-mark-ring" cx="318" cy="70" r="14" />
+          <line class="ex-lens-mark-handle" x1="328" y1="80" x2="338" y2="90" />
+        </g>
+
+        <text class="ex-caption" x="310" y="118" text-anchor="middle">
+          <tspan x="310" dy="0">Same starting point, same destination —</tspan>
+          <tspan x="310" dy="17">we trace the shortest path between them.</tspan>
+        </text>
+      </svg>
+      <span class="example-disclaimer">Illustrative — not an actual client. This is what we look for across your process, workflow, and data: the unnecessary turns a task takes on its way from start to finish.</span>
+    </div>
+
+
+    <div class="pipeline reveal">
+      <div class="pipeline-stage">
+        <span class="pipeline-label mono">WHAT WE LOOK AT</span>
+        <ul class="pipeline-list">
+          <li>Workflow &amp; process steps</li>
+          <li>CRM &amp; customer data</li>
+          <li>Spreadsheets &amp; manual trackers</li>
+          <li>Financial &amp; operational records</li>
+          <li>Support tickets &amp; service logs</li>
+        </ul>
+      </div>
+
+      <div class="pipeline-arrow" aria-hidden="true">→</div>
+
+      <div class="pipeline-stage">
+        <span class="pipeline-label mono">WHAT WE DO</span>
+        <p>We map how these actually connect and find the closest achievable AI opportunity — where a duplicate step, a disconnected system, or a manual bottleneck is quietly costing you time. Then we size it: what it takes to fix, and what it's worth.</p>
+      </div>
+
+      <div class="pipeline-arrow" aria-hidden="true">→</div>
+
+      <div class="pipeline-stage">
+        <span class="pipeline-label mono">WHAT COMES OUT</span>
+        <ul class="pipeline-values">
+          <li><span class="dot"></span>Efficiency</li>
+          <li><span class="dot"></span>Throughput</li>
+          <li><span class="dot"></span>Savings</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- AUDIENCE -->
+  <section class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow mono">WHO WE WORK WITH</div>
+      <h2>Built for teams who need answers, not a research paper.</h2>
+    </div>
+    <div class="audience-grid reveal">
+      <div class="audience-card">
+        <svg class="icon" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4">
+          <rect x="4" y="9" width="18" height="13" />
+          <path d="M9 9V5a4 4 0 0 1 8 0v4" />
+        </svg>
+        <span class="mono">SMALL &amp; MID-SIZED COMPANIES</span>
+        <h3>Operators, not labs</h3>
+        <p>Teams across manufacturing, resources, logistics, and services who need AI and analytics applied to a specific business problem — not a long innovation roadmap.</p>
+      </div>
+      <div class="audience-card">
+        <svg class="icon" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="13" cy="8" r="4" />
+          <path d="M5 22c0-5 4-8 8-8s8 3 8 8" />
+        </svg>
+        <span class="mono">NON-PROFITS</span>
+        <h3>Mission-driven, data-light</h3>
+        <p>Organizations doing real community work who want to understand their own impact and operations better, without hiring a full analytics team to do it.</p>
+      </div>
+      <div class="audience-card">
+        <svg class="icon" width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M13 3 3 8h20L13 3Z" />
+          <path d="M5 11v9M11 11v9M15 11v9M21 11v9" />
+          <path d="M3 22h20" />
+        </svg>
+        <span class="mono">PUBLIC SECTOR &amp; FUNDERS</span>
+        <h3>Easy to evaluate</h3>
+        <p>We keep our methods, structure, and reporting transparent and well-documented — built to hold up under the scrutiny of a grant or funding review.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- WHY -->
+  <section class="wrap" id="why">
+    <div class="section-head reveal">
+      <div class="eyebrow mono">WHY TRAXE</div>
+      <h2>Small enough to be direct. Structured enough to be accountable.</h2>
+    </div>
+    <div class="why-grid">
+      <ul class="why-list reveal">
+        <li>
+          <span class="mark">—</span>
+          <div>
+            <h4>You talk to the person doing the work</h4>
+            <p>No account managers between you and the analysis. You work directly with the people building your strategy.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mark">—</span>
+          <div>
+            <h4>Plain language, on purpose</h4>
+            <p>We explain what the data shows and what we're recommending in terms your team can repeat back — not vendor jargon.</p>
+          </div>
+        </li>
+        <li>
+          <span class="mark">—</span>
+          <div>
+            <h4>Built to be reviewed</h4>
+            <p>Our process, deliverables, and reporting are documented clearly enough to stand up to a board, a funder, or a grant reviewer.</p>
+          </div>
+        </li>
+      </ul>
+      <p style="color:var(--ink-faint); font-size:13.5px; margin-top:28px;">A note on the name: <span class="mono" style="color:var(--ink-soft);">Traxe</span> is short for "Trace X" — X being whatever outcome matters most to you: efficiency, throughput, savings, or capacity.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-block wrap" id="contact">
+    <div class="reveal">
+      <div class="eyebrow mono" style="justify-content:center;">LET'S TALK</div>
+      <h2>Not sure where to start? Let's meet — we'll help you find the opportunities.</h2>
+      <p>No sales deck required. Tell us what you're working on, and we'll walk through where the efficiency actually is — plainly, and only if it's a real fit.</p>
+      <a href="mailto:admin@traxe.io" class="btn-primary">admin@traxe.io</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <span class="mono">TRAXE TECHNOLOGIES © 2026</span>
+    <div class="foot-links">
+      <a href="#problem">Approach</a>
+      <a href="mailto:admin@traxe.io">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+
+  // explicit smooth-scroll for internal links — more reliable than native
+  // fragment navigation inside sandboxed/embedded preview contexts
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if(!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      links.classList.remove('open'); // close mobile menu if open
+    });
+  });
+  reveals.forEach(el => io.observe(el));
+
+  // ===== Interactive hero widget: twinkling star field + magnifier =====
+  const wordEl = document.getElementById('lockWord');
+  const frameEl = document.getElementById('lockFrame');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const svg = document.getElementById('fieldSvg');
+  const W = 340, H = 300;
+  const NEEDLE = { x: 170, y: 120 };
+
+  const rand = (seed => () => { seed = (seed*9301+49297)%233280; return seed/233280; })(11);
+  const dots = [];
+
+  for(let i=0;i<55;i++){
+    let x, y, tooClose;
+    do{
+      x = rand()*W; y = rand()*H;
+      tooClose = Math.hypot(x-NEEDLE.x, y-NEEDLE.y) < 20;
+    } while(tooClose);
+    const r = (rand()*1.1+0.7).toFixed(1);
+    dots.push({x,y,r});
+  }
+
+  const CLUSTERS = [
+    { name: 'EFFICIENCY', center: { x: 70, y: 195 } },
+    { name: 'THROUGHPUT', center: { x: 270, y: 205 } },
+    { name: 'SAVINGS',    center: { x: 118, y: 50 } },
+  ];
+
+  // each constellation is deliberately shaped to evoke its meaning, not randomly scattered:
+  // an upward arrow (efficiency/forward motion), a converging funnel (throughput/flow),
+  // and ascending steps (savings/growth) — in unit coordinates, scaled per cluster below.
+  const ICON_TEMPLATES = {
+    EFFICIENCY: [ [-1.0,0.6], [-0.15,-0.05], [0.9,-0.7], [0.25,-0.75], [0.85,-0.1] ],
+    THROUGHPUT: [ [-1.0,-0.7], [-1.0,0.7], [0.3,0.15], [1.0,0.0], [0.3,-0.15] ],
+    SAVINGS:    [ [-1.0,0.8], [-0.4,0.8], [-0.4,0.1], [0.3,0.1], [0.3,-0.7] ],
+  };
+  const ICON_SCALE = 28;
+
+  CLUSTERS.forEach(cluster => {
+    const dx = cluster.center.x - NEEDLE.x;
+    const dy = cluster.center.y - NEEDLE.y;
+    const mag = Math.hypot(dx, dy);
+    cluster.dir = { x: dx / mag, y: dy / mag };
+    cluster.dotIndices = [];
+    const template = ICON_TEMPLATES[cluster.name];
+    template.forEach(([ux, uy]) => {
+      const jx = cluster.center.x + ux * ICON_SCALE;
+      const jy = cluster.center.y + uy * ICON_SCALE;
+      const r = (rand()*0.5+0.9).toFixed(1);
+      dots.push({ x: jx, y: jy, r });
+      cluster.dotIndices.push(dots.length - 1);
+    });
+    const pts = cluster.dotIndices.map(i => dots[i]);
+    cluster.centroid = {
+      x: pts.reduce((s,p)=>s+p.x,0) / pts.length,
+      y: pts.reduce((s,p)=>s+p.y,0) / pts.length,
+    };
+    cluster.labelAnchor = cluster.centroid.x < 50 ? 'start' : (cluster.centroid.x > W - 50 ? 'end' : 'middle');
+    cluster.labelX = cluster.centroid.x;
+    cluster.labelY = cluster.centroid.y < 30 ? cluster.centroid.y + 24 : cluster.centroid.y - 20;
+  });
+
+  let dotsHTML = '';
+  dots.forEach((d,i) => {
+    const dur = (2 + rand()*3.5).toFixed(2);
+    const delay = (rand()*5).toFixed(2);
+    dotsHTML += `<circle class="noise-dot field-dot" id="d${i}" cx="${d.x.toFixed(1)}" cy="${d.y.toFixed(1)}" r="${d.r}" style="animation-duration:${dur}s; animation-delay:-${delay}s;" />`;
+  });
+
+  const needleHTML = `<circle class="needle-dot" id="needleDot" cx="${NEEDLE.x}" cy="${NEEDLE.y}" r="1.8" opacity="0.9" />`;
+
+  const bx = NEEDLE.x, by = NEEDLE.y, LENS_R = 22, GRAB_HALF = 32;
+  const reticleHTML = `
+    <g class="reticle idle-pulse" id="reticle">
+      <g id="magnifier">
+        <line class="lens-handle" x1="${bx + LENS_R*0.72}" y1="${by + LENS_R*0.72}" x2="${bx + LENS_R*1.55}" y2="${by + LENS_R*1.55}" />
+        <circle class="lens-glass" cx="${bx}" cy="${by}" r="${LENS_R}" />
+        <circle class="lens-ring" cx="${bx}" cy="${by}" r="${LENS_R}" />
+      </g>
+    </g>
+    <rect class="grab-zone" id="grabZone" x="${bx-GRAB_HALF}" y="${by-GRAB_HALF}" width="${GRAB_HALF*2}" height="${GRAB_HALF*2}" />
+  `;
+
+  const FRAME_INSET = 10, FRAME_SIZE = 14;
+  const frameHTML = `
+    <path class="frame-tick" d="M ${FRAME_INSET},${FRAME_INSET+FRAME_SIZE} L ${FRAME_INSET},${FRAME_INSET} L ${FRAME_INSET+FRAME_SIZE},${FRAME_INSET}" />
+    <path class="frame-tick" d="M ${W-FRAME_INSET-FRAME_SIZE},${FRAME_INSET} L ${W-FRAME_INSET},${FRAME_INSET} L ${W-FRAME_INSET},${FRAME_INSET+FRAME_SIZE}" />
+    <path class="frame-tick" d="M ${FRAME_INSET},${H-FRAME_INSET-FRAME_SIZE} L ${FRAME_INSET},${H-FRAME_INSET} L ${FRAME_INSET+FRAME_SIZE},${H-FRAME_INSET}" />
+    <path class="frame-tick" d="M ${W-FRAME_INSET-FRAME_SIZE},${H-FRAME_INSET} L ${W-FRAME_INSET},${H-FRAME_INSET} L ${W-FRAME_INSET},${H-FRAME_INSET-FRAME_SIZE}" />
+    <circle class="frame-via" cx="${FRAME_INSET}" cy="${FRAME_INSET}" r="1.3" />
+    <circle class="frame-via" cx="${W-FRAME_INSET}" cy="${FRAME_INSET}" r="1.3" />
+    <circle class="frame-via" cx="${FRAME_INSET}" cy="${H-FRAME_INSET}" r="1.3" />
+    <circle class="frame-via" cx="${W-FRAME_INSET}" cy="${H-FRAME_INSET}" r="1.3" />
+  `;
+
+  let labelsHTML = '';
+  CLUSTERS.forEach((cluster, ci) => {
+    labelsHTML += `<text class="insight-label mono" id="hlabel-${ci}" text-anchor="${cluster.labelAnchor}" x="${cluster.labelX}" y="${cluster.labelY}" style="opacity:0">${cluster.name}</text>`;
+  });
+
+  let nebulaHTML = '<defs><radialGradient id="nebulaGrad" cx="50%" cy="50%" r="50%">'
+    + '<stop offset="0%" stop-color="var(--accent)" stop-opacity="0.55" />'
+    + '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />'
+    + '</radialGradient></defs><g id="nebulae">';
+  CLUSTERS.forEach((cluster, ci) => {
+    nebulaHTML += `<ellipse class="nebula" id="hnebula-${ci}" cx="${cluster.centroid.x}" cy="${cluster.centroid.y}" rx="40" ry="34" fill="url(#nebulaGrad)" style="opacity:0" />`;
+  });
+  nebulaHTML += '</g>';
+
+  svg.innerHTML = frameHTML + nebulaHTML + `<g id="hconnections"></g>` + dotsHTML + needleHTML + reticleHTML + labelsHTML
+    + `<rect id="hCelebrationFlash" class="celebration-flash" x="0" y="0" width="${W}" height="${H}" />`;
+
+  const needleDot = document.getElementById('needleDot');
+  const reticle = document.getElementById('reticle');
+  const magnifierGroup = document.getElementById('magnifier');
+  const grabZone = document.getElementById('grabZone');
+  const hConnGroup = document.getElementById('hconnections');
+  const hCelebrationFlash = document.getElementById('hCelebrationFlash');
+
+  const REVEAL_STEP=13, MIN_PROJECTION=8;
+  let dragging=false;
+  let needlePos={x:NEEDLE.x,y:NEEDLE.y}, dragOrigin={x:NEEDLE.x,y:NEEDLE.y};
+  let clusterState=[], allFoundCelebrated=false;
+
+  const HERO_WORDS = ['efficiency', 'throughput', 'savings'];
+  function displayWord(w){ return w.charAt(0).toUpperCase() + w.slice(1); }
+  const AMBIENT_SEQUENCE = [0, 1, 2, 0];
+  let seqPos = -1;
+  let ambientInterval = null;
+
+  function rotateHeroWord(){
+    seqPos++;
+    const idx = AMBIENT_SEQUENCE[seqPos];
+    wordEl.textContent = displayWord(HERO_WORDS[idx]);
+    frameEl.classList.remove('pulse'); wordEl.classList.remove('pulse');
+    void frameEl.offsetWidth;
+    frameEl.classList.add('pulse'); wordEl.classList.add('pulse');
+    if(seqPos >= AMBIENT_SEQUENCE.length - 1){
+      if(ambientInterval){ clearInterval(ambientInterval); ambientInterval = null; }
+    }
+  }
+  function startAmbient(){
+    seqPos = -1;
+    rotateHeroWord();
+    if(AMBIENT_SEQUENCE.length > 1){
+      ambientInterval = setInterval(rotateHeroWord, reduceMotion ? 1400 : 2600);
+    }
+  }
+  function stopAmbient(){
+    if(ambientInterval){ clearInterval(ambientInterval); ambientInterval = null; }
+  }
+  startAmbient();
+
+  function svgPointFromClient(cx,cy){
+    const pt=svg.createSVGPoint(); pt.x=cx; pt.y=cy;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+  function positionReticle(x,y){
+    const dx = (x - bx).toFixed(1), dy = (y - by).toFixed(1);
+    magnifierGroup.setAttribute('transform', `translate(${dx},${dy})`);
+    grabZone.setAttribute('x', x-GRAB_HALF); grabZone.setAttribute('y', y-GRAB_HALF);
+  }
+  function beginDragSession(){
+    dragOrigin={x:needlePos.x,y:needlePos.y};
+    clusterState = CLUSTERS.map(()=>({activeCount:0, frozen:[]}));
+    allFoundCelebrated=false;
+    let html='';
+    CLUSTERS.forEach((cluster,ci)=>{
+      html += `<line class="conn-line beam-line" id="hbeam-${ci}" x1="${dragOrigin.x}" y1="${dragOrigin.y}" x2="${dots[cluster.dotIndices[0]].x}" y2="${dots[cluster.dotIndices[0]].y}" style="opacity:0" />`;
+      for(let idx=0; idx<cluster.dotIndices.length-1; idx++){
+        const a = dots[cluster.dotIndices[idx]], b = dots[cluster.dotIndices[idx+1]];
+        html += `<line class="conn-line chain-line" id="hchain-${ci}-${idx}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" style="opacity:0" />`;
+      }
+    });
+    hConnGroup.innerHTML = html;
+  }
+  function triggerCelebration(){
+    hCelebrationFlash.classList.remove('flash');
+    void hCelebrationFlash.getBoundingClientRect();
+    hCelebrationFlash.classList.add('flash');
+  }
+  let liveWordCi = -1;
+
+  function updatePattern(){
+    const dx=needlePos.x-dragOrigin.x, dy=needlePos.y-dragOrigin.y;
+    let bestCi = 0, bestProjection = -Infinity;
+    CLUSTERS.forEach((cluster, ci) => {
+      const projection = dx*cluster.dir.x + dy*cluster.dir.y;
+      if(projection > bestProjection){ bestProjection = projection; bestCi = ci; }
+    });
+    if(bestCi !== liveWordCi){
+      liveWordCi = bestCi;
+      wordEl.textContent = displayWord(HERO_WORDS[bestCi]);
+      frameEl.classList.remove('pulse'); wordEl.classList.remove('pulse');
+      void frameEl.offsetWidth;
+      frameEl.classList.add('pulse'); wordEl.classList.add('pulse');
+    }
+    CLUSTERS.forEach((cluster,ci)=>{
+      const projection = dx*cluster.dir.x + dy*cluster.dir.y;
+      const state = clusterState[ci];
+      const proposed = projection>=MIN_PROJECTION
+        ? Math.min(cluster.dotIndices.length, Math.floor((projection-MIN_PROJECTION)/REVEAL_STEP)+1)
+        : 0;
+      if(proposed > state.activeCount){
+        for(let idx=state.activeCount; idx<proposed; idx++){
+          const dotIdx=cluster.dotIndices[idx], d=dots[dotIdx];
+          const influence=Math.max(0.14,0.55/(1+idx*0.4));
+          state.frozen[idx]={x:d.x+dx*influence, y:d.y+dy*influence};
+        }
+        state.activeCount=proposed;
+      }
+      cluster.dotIndices.forEach((dotIdx,idx)=>{
+        const dotEl=document.getElementById('d'+dotIdx);
+        if(idx<state.activeCount){
+          const pos=state.frozen[idx];
+          dotEl.setAttribute('cx',pos.x.toFixed(1)); dotEl.setAttribute('cy',pos.y.toFixed(1));
+          dotEl.setAttribute('r','3.2');
+          dotEl.classList.add('connected');
+          dotEl.style.opacity = ci === bestCi ? '0.95' : '0.5';
+        } else {
+          const d=dots[dotIdx];
+          dotEl.setAttribute('cx',d.x.toFixed(1)); dotEl.setAttribute('cy',d.y.toFixed(1));
+          dotEl.setAttribute('r', d.r);
+          dotEl.classList.remove('connected');
+          dotEl.style.opacity = '';
+        }
+      });
+      const beamEl = document.getElementById('hbeam-'+ci);
+      if(state.activeCount > 0){
+        const first = state.frozen[0];
+        beamEl.setAttribute('x1',needlePos.x.toFixed(1)); beamEl.setAttribute('y1',needlePos.y.toFixed(1));
+        beamEl.setAttribute('x2',first.x.toFixed(1)); beamEl.setAttribute('y2',first.y.toFixed(1));
+        beamEl.style.opacity = ci === bestCi ? '0.5' : '0.2';
+      } else {
+        beamEl.style.opacity = 0;
+      }
+      for(let idx=0; idx<cluster.dotIndices.length-1; idx++){
+        const chainEl = document.getElementById(`hchain-${ci}-${idx}`);
+        if(idx+1 < state.activeCount){
+          const a = state.frozen[idx], b = state.frozen[idx+1];
+          chainEl.setAttribute('x1',a.x.toFixed(1)); chainEl.setAttribute('y1',a.y.toFixed(1));
+          chainEl.setAttribute('x2',b.x.toFixed(1)); chainEl.setAttribute('y2',b.y.toFixed(1));
+          chainEl.style.opacity = ci === bestCi ? '0.6' : '0.25';
+        } else {
+          chainEl.style.opacity = 0;
+        }
+      }
+      const nebulaEl = document.getElementById('hnebula-'+ci);
+      nebulaEl.style.opacity = state.activeCount === 0 ? 0 : (ci === bestCi ? 0.5 : 0.16);
+      const labelEl = document.getElementById('hlabel-'+ci);
+      const complete = state.activeCount === cluster.dotIndices.length;
+      labelEl.style.opacity = complete ? (ci === bestCi ? 0.95 : 0.4) : 0;
+    });
+    const allFound = clusterState.every(s => s.activeCount > 0);
+    if(allFound && !allFoundCelebrated){ allFoundCelebrated=true; triggerCelebration(); }
+  }
+  function endDragSession(){
+    CLUSTERS.forEach((cluster,ci)=>{
+      cluster.dotIndices.forEach((dotIdx,idx)=>{
+        const d=dots[dotIdx];
+        const dotEl = document.getElementById('d'+dotIdx);
+        dotEl.setAttribute('cx',d.x.toFixed(1));
+        dotEl.setAttribute('cy',d.y.toFixed(1));
+        dotEl.setAttribute('r', d.r);
+        dotEl.classList.remove('connected');
+        dotEl.style.opacity = '';
+      });
+      document.getElementById('hbeam-'+ci).style.opacity = 0;
+      for(let idx=0; idx<cluster.dotIndices.length-1; idx++){
+        document.getElementById(`hchain-${ci}-${idx}`).style.opacity = 0;
+      }
+      document.getElementById('hnebula-'+ci).style.opacity = 0;
+      document.getElementById('hlabel-'+ci).style.opacity = 0;
+    });
+    clusterState=[]; allFoundCelebrated=false;
+  }
+  function animateNeedleBack(){
+    const sx=needlePos.x, sy=needlePos.y, ex=dragOrigin.x, ey=dragOrigin.y;
+    if(reduceMotion){ moveNeedleTo(ex,ey); return; }
+    const duration=260, startTime=performance.now();
+    function step(now){
+      const t=Math.min(1,(now-startTime)/duration);
+      const eased=1-Math.pow(1-t,3);
+      moveNeedleTo(sx+(ex-sx)*eased, sy+(ey-sy)*eased);
+      if(t<1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function moveNeedleTo(x,y){
+    needlePos.x=Math.max(12,Math.min(W-12,x));
+    needlePos.y=Math.max(12,Math.min(H-12,y));
+    needleDot.setAttribute('cx',needlePos.x.toFixed(1));
+    needleDot.setAttribute('cy',needlePos.y.toFixed(1));
+    positionReticle(needlePos.x, needlePos.y);
+    if(dragging) updatePattern();
+  }
+  grabZone.addEventListener('pointerdown',(e)=>{
+    dragging=true; grabZone.classList.add('dragging');
+    grabZone.setPointerCapture(e.pointerId);
+    reticle.classList.remove('idle-pulse');
+    stopAmbient();
+    liveWordCi = -1;
+    beginDragSession();
+  });
+  grabZone.addEventListener('pointermove',(e)=>{
+    if(!dragging) return;
+    const p=svgPointFromClient(e.clientX,e.clientY);
+    moveNeedleTo(p.x,p.y);
+  });
+  grabZone.addEventListener('pointerup',(e)=>{
+    dragging=false; grabZone.classList.remove('dragging');
+    grabZone.releasePointerCapture(e.pointerId);
+    endDragSession(); animateNeedleBack();
+    reticle.classList.add('idle-pulse');
+    startAmbient();
+  });
+</script>
+
+</body>
+</html>
