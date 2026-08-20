@@ -140,7 +140,7 @@
     mask-image:radial-gradient(circle at 50% 42%, black 0%, transparent 72%);
     pointer-events:none;
   }
-  .mini-field svg{ width:100%; height:auto; display:block; cursor:grab; position:relative; }
+  .mini-field svg{ width:100%; height:auto; display:block; cursor:grab; position:relative; touch-action:none; }
   .mini-caption{ margin-top:10px; font-size:10.5px; color:var(--ink-faint); text-align:center; letter-spacing:0.06em; }
   .frame-tick{ stroke:var(--ink-faint); stroke-width:1; fill:none; opacity:0.6; }
   .frame-via{ fill:var(--ink-faint); opacity:0.5; }
@@ -154,7 +154,7 @@
   @keyframes twinkle{ 0%,100%{ opacity:0.18; } 50%{ opacity:0.65; } }
   .field-dot.connected{ animation:none; fill:var(--accent); }
   .needle-dot{ fill:var(--accent); }
-  .grab-zone{ fill:transparent; cursor:grab; }
+  .grab-zone{ fill:transparent; cursor:grab; touch-action:none; }
   .grab-zone.dragging{ cursor:grabbing; }
   .reticle{ opacity:0.85; }
   .reticle.idle-pulse{ animation: idleBreathe 2.4s ease-in-out infinite; }
@@ -928,6 +928,7 @@
     if(dragging) updatePattern();
   }
   grabZone.addEventListener('pointerdown',(e)=>{
+    e.preventDefault();
     dragging=true; grabZone.classList.add('dragging');
     grabZone.setPointerCapture(e.pointerId);
     reticle.classList.remove('idle-pulse');
@@ -937,10 +938,12 @@
   });
   grabZone.addEventListener('pointermove',(e)=>{
     if(!dragging) return;
+    e.preventDefault();
     const p=svgPointFromClient(e.clientX,e.clientY);
     moveNeedleTo(p.x,p.y);
   });
   grabZone.addEventListener('pointerup',(e)=>{
+    e.preventDefault();
     dragging=false; grabZone.classList.remove('dragging');
     grabZone.releasePointerCapture(e.pointerId);
     endDragSession(); animateNeedleBack();
