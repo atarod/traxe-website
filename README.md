@@ -1,28 +1,28 @@
 # Traxe Technologies — Website
 
-The marketing site for **Traxe Technologies**, a boutique AI adoption consultancy. Single-file static site — no build step, no framework, no dependencies beyond two Google Fonts.
+The website for **Traxe Technologies**, a Vancouver-based technology and product consulting firm, founded in 2020.
+
+Single-file static site: no build step, no framework, no dependencies beyond two Google Fonts.
 
 ## Live site
 
-https://atarod.github.io/traxe-website/
+https://traxe.io
 
-## The concept
+## What's on the page
 
-The name "Traxe" is short for **Trace X** — Traxe traces a clear signal through an organization's data and process to find efficiency, throughput, or savings. The whole site is built around that idea:
-
-- The hero is an interactive star field. Most of the dots twinkle randomly, like noise. Three clusters are quietly shaped like meaningful icons (an arrow, a funnel, ascending steps). Grab the magnifier and pull it toward one, and that cluster's dots connect into its shape, a soft nebula glow blooms behind it, and its name fades in — "found," not just labeled.
-- The headline word live-tracks whichever direction you're pulling toward, synced to the same interaction.
-- A "where the value comes from" section explains the same idea in a plain diagram — inputs converging, a value coming out the other side.
-- A worked example shows a single symbolic line — tangled, then straight — same start, same end, less wasted motion in between.
+- **Hero:** what Traxe does, in one headline and one sentence.
+- **Our work:** four projects: an AI analytics platform over financial data, a customer-facing AI assistant with a governance layer, blockchain-based supply chain traceability, and green energy tokenization. Each has a short what / why / how / value summary and a simple block diagram.
+- **Track record:** innovation funding won, research partnerships, and how the team was developed.
+- **Contact:** one email address.
 
 ## Stack
 
-Plain HTML, CSS, and vanilla JavaScript. No React, no build tools, no npm install. Everything — including the interactive SVG widget — is hand-written in one `index.html` file, intentionally, to keep the whole thing under 50KB.
+Plain HTML, CSS, and a few lines of vanilla JavaScript (mobile menu, scroll reveal, smooth scrolling). No React, no build tools, no npm install. The whole site is one `index.html` file of about 19 KB.
 
 ## Running it locally
 
-Just open `index.html` in a browser. That's the whole setup.
+Open `index.html` in a browser.
 
 ## License
 
-© Traxe Technologies. Code is shared here for portfolio/reference purposes.
+© Traxe Technologies. Code is shared here for portfolio and reference purposes.
